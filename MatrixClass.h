@@ -9,10 +9,10 @@
 #include <ostream>
 
 class MatrixClass {
-    int N;
+    int numberOfDegree;
     double **matrix;
 public:
-    MatrixClass(int N);
+    MatrixClass(int numberOfDegree);
 
     ~MatrixClass();
 
@@ -20,10 +20,10 @@ public:
 
     friend std::ostream &operator<<(std::ostream &, MatrixClass &);
 
-/*
-    friend MatrixClass operator+(const MatrixClass &m);
 
-    friend MatrixClass &operator+=(const MatrixClass &m);
+    friend MatrixClass &operator+(const MatrixClass &m);
+
+/*    friend MatrixClass &operator+=(const MatrixClass &m);
 
     friend MatrixClass operator-(const MatrixClass &m);
 
@@ -36,6 +36,7 @@ public:
 
 //MatrixClass operator+(const MatrixClass &m);
 std::ostream &operator<<(std::ostream &out, MatrixClass &m);
+MatrixClass &operator+(const MatrixClass &m);
 
 
 #endif //UNTITLED_MATRIXCLASS_H

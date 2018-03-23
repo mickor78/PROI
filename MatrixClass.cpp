@@ -7,20 +7,21 @@
 #include <iostream>
 #include "MatrixClass.h"
 
-MatrixClass::MatrixClass(int N) {
-    matrix = new double*[N];
-    for (int i = 0; i < N; ++i) {
-        matrix[i] = new double[N];
+MatrixClass::MatrixClass(int numberOfDegree) {
+    matrix = new double*[numberOfDegree];
+    for (int i = 0; i < numberOfDegree; ++i) {
+        matrix[i] = new double[numberOfDegree];
     }
 
     srand(time(NULL));
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
-            matrix[i][j] = 4.0;
+    for (int i = 0; i < numberOfDegree; ++i) {
+        for (int j = 0; j < numberOfDegree; ++j) {
+            //matrix[i][j] = (double)(std::rand())/(double)(RAND_MAX);
+            matrix[i][j] = (std::rand()%1000);
         }
     }
 
-    MatrixClass::N = N;
+    MatrixClass::numberOfDegree = numberOfDegree;
 
 }
 /*
@@ -31,30 +32,46 @@ double **MatrixClass::getMatrix(int n, int m) const {
 */
 
 MatrixClass::~MatrixClass() {
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < numberOfDegree; ++i)
         delete [] matrix[i];
     delete [] matrix;
 }
 
 
 std::ostream &operator<<(std::ostream &out, MatrixClass &m) {
-    out<<"Matrix degree N = "<< m.N <<"\n";
-    for (int i = 0; i < m.N; ++i) {
-        for (int j = 0; j < m.N; ++j) {
+    out<<"Matrix degree N = "<< m.numberOfDegree <<"\n";
+    for (int i = 0; i < m.numberOfDegree; ++i) {
+        for (int j = 0; j < m.numberOfDegree; ++j) {
             out<<m.matrix[i][j]<<" ";
         }
         out<<std::endl;
     }
     return out;
 }
+
+MatrixClass operator+(const MatrixClass &m) {
+
+    //if (m.numberOfDegree != this->numberOfDegree)
+    //    return this;
+    //else {
+        MatrixClass temp = *this;
+        MatrixClass result(temp.numberOfDegree);
+        for (int i = 0; i < temp.numberOfDegree; ++i) {
+            for (int j = 0; j < temp.numberOfDegree; ++j) {
+                result.matrix[i][j]=m.matrix[i][j]+temp.matrix[i][j];
+            }
+        }
+        return result;
+    //}
+}
 /*
 MatrixClass operator+(const MatrixClass &m) {
-    return MatrixClass(MatrixClass::N);
+    return MatrixClass(MatrixClass::numberOfDegree);
 }*/
 /*
 
 double MatrixClass::determinar(double**) {
-    MatrixClass *minor = new MatrixClass(N);
+    MatrixClass *minor = new MatrixClass(numberOfDegree);
 
 */
 
