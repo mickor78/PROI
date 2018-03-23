@@ -49,19 +49,17 @@ std::ostream &operator<<(std::ostream &out, MatrixClass &m) {
     return out;
 }
 
-MatrixClass operator+(const MatrixClass &m) {
+MatrixClass &operator+(const MatrixClass &m) {
 
     //if (m.numberOfDegree != this->numberOfDegree)
     //    return this;
-    //else {
-        MatrixClass temp = *this;
-        MatrixClass result(temp.numberOfDegree);
-        for (int i = 0; i < temp.numberOfDegree; ++i) {
-            for (int j = 0; j < temp.numberOfDegree; ++j) {
-                result.matrix[i][j]=m.matrix[i][j]+temp.matrix[i][j];
+    //else
+        MatrixClass temp(this->numberOfDegree);
+        for (int i = 0; i < this->numberOfDegree; ++i) {
+            for (int j = 0; j < this->numberOfDegree; ++j) {
+                temp.matrix[i][j]=m.matrix[i][j]+this->matrix[i][j];
             }
         }
-        return result;
     //}
 }
 /*
